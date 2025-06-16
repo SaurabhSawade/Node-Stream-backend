@@ -3,6 +3,8 @@ import { createReadStream, statSync } from 'fs';
 import {readFileSync} from 'fs';
 import {dirname} from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
+
 
 
 
@@ -11,11 +13,12 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
+app.use(cors());
 
-// app.get('/', (req, res) => {
-//   res.send('Hello, World!');
-// }
-// );
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
 app.use(express.static(`${__dirname}/public`));
 app.get('/video', (req, res) => {
   // const filePath = readFileSync(`${__dirname}/public/video.mp4`);
@@ -48,6 +51,5 @@ app.get('/video', (req, res) => {
 
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
-}
-);
+});
 export default app;
